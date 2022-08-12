@@ -13,51 +13,47 @@ $(document).ready(function () {
     })
 
     //Saves user input for each hour
-    $("#9am .description").val(localStorage.getItem("9am"));
+    $("#9 .description").val(localStorage.getItem("9"));
 
-    $("#10am .description").val(localStorage.getItem("10am"));
+    $("#10 .description").val(localStorage.getItem("10"));
 
-    $("#11am .description").val(localStorage.getItem("11am"));
+    $("#11 .description").val(localStorage.getItem("11"));
 
-    $("#12pm .description").val(localStorage.getItem("12pm"));
+    $("#12 .description").val(localStorage.getItem("12"));
 
-    $("#1pm .description").val(localStorage.getItem("1pm"));
+    $("#13 .description").val(localStorage.getItem("13"));
 
-    $("#2pm .description").val(localStorage.getItem("2pm"));
+    $("#14 .description").val(localStorage.getItem("14"));
 
-    $("#3pm .description").val(localStorage.getItem("3pm"));
+    $("#15 .description").val(localStorage.getItem("15"));
 
-    $("#4pm .description").val(localStorage.getItem("4pm"));
+    $("#16 .description").val(localStorage.getItem("16"));
 
-    $("#5pm .description").val(localStorage.getItem("5pm"));
+    $("#17 .description").val(localStorage.getItem("17"));
 
     //Funtion to color code time blocks to indicate whether it is in the past, present, or future
     function hourSaved() {
-        var currentTime = moment().hour();
 
-        $(".time-block").each(function () {
-            var rowHour = parseInt($(this).attr("id").split("hour"));
-            console.log(rowHour, currentTime)
+        for (i = 9; i < 18; i++) {
 
+        var rowHour = i;
+
+        currentTime = moment().format('H');
+
+        console.log(rowHour, currentTime);
+            
             if (rowHour < currentTime) {
-                $(this).addClass("past");
-                $(this).removeClass("future");
-                $(this).removeClass("present");
+                $("#" + i).addClass("past");
+                
             }
-            else if (rowHour === currentTime) {
-                $(this).removeClass("past");
-                $(this).addClass("present");
-                $(this).removeClass("future");
-            }
+            else if (rowHour > currentTime) {
+                $("#" + i).addClass("future");
+                }
             else {
-                $(this).removeClass("present");
-                $(this).removeClass("past");
-                $(this).addClass("future");
+                $("#" + i).addClass("present");
             }
-        })
-    }
-    hourSaved();
+        }}
+        hourSaved();
 
-    setInterval(hourSaved, 60000)
-    
-})
+        setInterval(hourSaved, 60000)
+    })
